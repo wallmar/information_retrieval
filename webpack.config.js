@@ -44,10 +44,6 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
-        }),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './src/about.html'),
-            filename: 'about.html',
-        }),
+        })
     ]
 };

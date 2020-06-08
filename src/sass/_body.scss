@@ -1,0 +1,8 @@
+@import 'utilities';
+
+.result {
+  &__title {
+    color: $primaryColor;
+    font-size: $largeSize;
+  }
+}
