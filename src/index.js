@@ -8,9 +8,9 @@ const input = document.querySelector(".input")
 
     form.addEventListener('submit', async (ev) => {
         ev.preventDefault()
-
+        const solr = new Solr();
         try {
-            const results = await Solr.search(input.value)
+            const results = await solr.search(input.value)
             const count = document.createElement('p')
             count.innerHTML = getCountHTML(results.numFound)
             section.appendChild(count)

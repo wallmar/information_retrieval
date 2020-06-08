@@ -33,17 +33,7 @@ module.exports = {
                         name: 'images/[hash]-[name].[ext]'
                     }
                 }]
-            },
-            {
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
-            },
+            }
         ]
     },
     plugins: [
