@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: "./src/index.js",
+    devtool: 'inline-source-map',
     output: {
         filename: "main.js",
         path: path.resolve(__dirname, './dist')
@@ -17,7 +18,7 @@ module.exports = {
                     options: {
                         hmr: process.env.NODE_ENV === 'development',
                     },
-                },"css-loader", "sass-loader",],
+                }, "css-loader", "sass-loader",],
             },
             {
                 test: /\.css$/,
@@ -32,6 +33,16 @@ module.exports = {
                         name: 'images/[hash]-[name].[ext]'
                     }
                 }]
+            },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
             },
         ]
     },
