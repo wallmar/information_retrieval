@@ -1,0 +1,15 @@
+.news{
+    background-color: #faddd3;
+    padding: 0.3em;
+    border-radius: 6px;
+    &__list{
+        padding: 0.3em 0;
+        list-style: none;
+    }
+    &__link{
+        &:hover{
+            color: #ff4500;
+            transition: 0.2s;
+        }
+    }
+}

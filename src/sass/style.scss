@@ -1,0 +1,26 @@
+@import 'header', 'services', 'news', 'references', 'footer', 'utilities','about';
+
+* {
+  box-sizing:border-box;
+  font-family: $myFont;
+  font-size:$smallSize;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+}
+.max-width-container{
+  width:100%;
+  max-width:1000px;
+  margin: 0 auto;
+  padding:20px;
+}
+h2{
+  margin-top:0.8em;
+  margin-bottom: 0.8em;
+  color: $primaryColor;
+  font-size: $mediumSize;
+}
+a{
+  text-decoration: none;
+  color: $primaryColor;
+}

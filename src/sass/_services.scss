@@ -1,0 +1,38 @@
+@import 'utilities';
+
+.services{
+  display: flex;
+  list-style-type: none;
+  @media screen and (max-width: 1020px){
+    &{
+      flex-direction: column;
+    }
+  }
+  &__item{
+    display: block;
+    height: 300px;
+    width: 300px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px auto;
+    &__svg{
+      height: 100%;
+      width: 180px;
+      margin-top: -25px;
+    }
+    &--design{
+      background-color: $sectionColor1;
+    }
+    &--strategie{
+      background-color: $sectionColor2;
+    }
+    &--consulting{
+      background-color: $sectionColor3;
+    }
+    &:hover{
+      transform: scale(1.1);
+      transition: 0.3s;
+    }
+  }
+}

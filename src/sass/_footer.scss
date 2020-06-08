@@ -1,0 +1,54 @@
+@import 'utilities';
+
+.footer{
+    background-color: $primaryColor;
+    margin-top: 2em;
+    color: white;
+    padding: 0 1em 5em;
+    &__flex{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        @media screen and (max-width: 700px){
+            &{
+                display: block;
+            }
+        }
+        &__section{
+            &__link{
+                color: white;
+                cursor: pointer;
+                &:hover{
+                    color: #ff4500;
+                    transition: 0.2s;
+                }
+            }
+            &--copyright{
+                width: 50%;
+                @media screen and (max-width: 700px){
+                    &{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        &__p{
+            margin: 1.5em 0;
+            line-height: 1.5em;
+        }
+    }
+    &__credits{
+        &__list{
+            width: 96%;
+            margin: 0 auto;
+            &__item{
+                font-size: 0.8em;
+                padding-left: 0.8em;
+                word-wrap: break-word;
+            }
+        }
+        &__p{
+            margin-bottom: 0.3em;
+        }
+    }
+}

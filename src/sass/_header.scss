@@ -1,0 +1,211 @@
+@import 'utilities';
+
+.header{
+    &__bar{
+        display: flex;
+        justify-content: space-between;
+        position:fixed;
+        width: 100%;
+        background-color: #ffffff;
+        z-index: 1;
+        top: 0;
+        box-shadow: 0 1px 5px $primaryColor;
+        @media screen and (max-width: 800px){
+            display: block;
+        } 
+    }
+
+    h1{
+        font-size: 15pt;
+        width: 60%;
+        padding: 0.1em 0.5em 0 0.5em;
+        @media screen and (max-width: 800px){
+            width: 85%;
+        }
+        @media screen and (max-width: 420px){
+            font-size: 10pt;
+            white-space: nowrap;
+        }
+    }
+    
+
+    &__logo{
+        font-size: 3em;
+        text-decoration: none;
+        color: $primaryColor;
+    }
+    &__nav{
+        width: 55%;
+        padding-right: 2em;
+
+        &-toggle-input{
+            display: none;
+        }
+        &-toggle-label{
+            display: none;
+        }
+
+        @media screen and (max-width: 800px){
+            width: 100%;
+            &-toggle-label{
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 0;
+                cursor: pointer;
+                font-size: 2em;
+                margin: 10px 0.5em 15px 0;
+                color: #00b9f2;
+                user-select: none;
+                @media screen and (max-width: 420px){
+                    margin-top: 0;
+                }
+            }
+        }
+        @media screen and (max-width: 800px){
+            width: 100%;
+            padding-right: 0;
+        }
+
+    }
+
+    @media screen and (max-width: 800px){
+        &__nav input:checked + &__list{
+            display: flex;
+            flex-direction: column;
+
+
+            li{
+                text-align: center;
+                padding: 0.5em 0.5em 0.5em 0;
+            }
+        }
+    }
+
+    &__list{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        list-style: none;
+        margin-top: 1.7em;
+        flex-wrap:wrap;
+
+        @media screen and (max-width: 800px){
+            &{
+                display: none;
+                margin-top: 0;
+            }
+        }
+    }
+
+    &__link{
+        text-decoration: none;
+        color: black;
+        font-weight: 300;
+        font-size: $smallSize;
+        //source: https://stackoverflow.com/questions/28623446/hover-effect-expand-bottom-border
+        &:after{
+            display:block;
+            content: '';
+            border-bottom: solid 2px $primaryColor;
+            transform: scaleX(0);
+        }
+        &:hover{
+            color: $primaryColor;
+            &:after{
+                transform: scaleX(1);
+                transition: transform 250ms ease-in-out;
+                @media screen and (max-width: 800px){
+                    transform: scaleX(0.2);
+                }
+            }
+        }
+        &--current{
+            color: $primaryColor;
+            &:after{
+                transform: scaleX(1);
+                @media screen and (max-width: 800px){
+                    transform: scaleX(0.2);
+                }
+            }
+        }
+        @media screen and (max-width: 1000px){
+            &{
+                font-size: 12pt;
+            }
+        }
+        @media screen and (max-width: 800px){
+            &{
+                font-size: 18pt;
+            }
+        }
+    }
+    &__hero{
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        margin-top: 80px;
+        &--about{
+            background-image: url("../images/about-us.jpg");
+        }
+        &--home{
+            background-image: url("../images/illuminated-keyboard-1242287.jpg");
+        }
+        padding-left: 53%;
+        
+        &__container{
+            margin: 2.5em 0;
+            min-height: 30vh;
+            &__p{
+                font-size: 2.5em;
+                color: $primaryColor;
+                background-color: white;
+                display: inline;
+                line-height: 1.2em;
+                font-weight: 500;
+                @media screen and (max-width: 500px){
+                    font-size: $smallSize;
+                }
+
+                @media screen and (-webkit-min-device-pixel-ratio:0) { 
+                    line-height: 1.5em;
+                }
+            }
+            &__button{
+                color: white;
+                background-color: #45b348;
+                border: none;
+                font-size: $mediumSize;
+                padding: 0.5em;
+                border-radius: 6px;
+                display: block;
+                margin-top: 0.5em;
+                cursor: pointer;
+                &:hover{
+                    background-color: #56c459;
+                }
+                @media screen and (max-width: 500px){
+                    font-size: $smallSize;
+                }
+            }
+        }
+        @media screen and (max-width: 420px){
+            margin-top: 55px;
+        }
+
+        @media screen and (max-width: 1070px){
+            padding-left: 0;
+            align-items: flex-end;
+
+            &__container{
+                padding: 0 2%;
+            }
+        }
+    }
+}
+@-moz-document url-prefix() {
+    .header__hero__container__p{
+        line-height: 1.2em;
+    }
+}
