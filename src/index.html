@@ -2,14 +2,29 @@
 <main>
     <section class="max-width-container section">
         <h2 class="mb-5 mt-2">Suche nach deinen ?</h2>
-        <form class="d-flex justify-content-around mb-5 form">
-            <div class="input-group input-group-lg mr-4">
+        <form class="mb-5 form">
+
+            <div class="input-group input-group-lg">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-lg">Suche ...</span>
                 </div>
-                <input type="text" class="form-control input" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Placeholder">
+                <input type="text" class="form-control input" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="z.B. Deine Mudda">
             </div>
-            <button type="submit" class="btn btn-warning submit">Submit</button>
+            <div class="d-flex justify-content-around mt-4 mb-4">
+                <div class="input-group input-group-sm mr-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg2">Von</span>
+                    </div>
+                    <input type="number" class="form-control from" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="z.B. 2003">
+                </div>
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg3">Bis</span>
+                    </div>
+                    <input type="number" class="form-control to" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="z.B. 2007">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-warning submit btn-lg">Submit</button>
         </form>
     </section>
 <%= require('html-loader!./partials/_footer.html') %>

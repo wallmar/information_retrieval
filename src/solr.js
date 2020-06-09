@@ -1,26 +1,27 @@
-/* TODO: Configure which field names Solr should use for title and text. */
-export const TITLE_FIELD = "title_t";
-export const TEXT_FIELD = "text_t";
-
 export default class Solr {
-    constructor(solrUrl = "http://localhost:8983/solr/simplewiki") {
+    constructor(solrUrl = "http://localhost:8983/solr/movie-club") {
         this.solrUrl = solrUrl;
     }
     
-    async search(query, start = 0, rows = 10) {
+    async search(query, from, to, start = 0, rows = 10) {
+        if (from === "") from = 0;
+        if (to === "") to = 3000;
         return await this.postSolrRequest("select", {
             params: {
                 fl: "*,score",
                 start,
                 rows,
-                /* TODO: Put further common query parameters (https://lucene.apache.org/solr/guide/common-query-parameters.html) here. */
+                fq: `year_i:[${from} TO ${to}]`,
+                hl: "on",
+                "hl.simple.pre": "<span class='hl'>",
+                "hl.simple.post": "</span>",
+                stopwords: "true",
             },
             query: {
                 edismax: {
                     query,
-                    qf: `${TITLE_FIELD}^100 ${TEXT_FIELD}^5`,
+                    qf: "title_txt_en^10 plot_txt_en^5",
                     mm: "100%",
-                    /* TODO: Put further edismax query parameters (https://lucene.apache.org/solr/guide/8_5/the-extended-dismax-query-parser.html) here. */
                 },
             },
         });
@@ -38,6 +39,6 @@ export default class Solr {
         }
 
         const response = await jsonResponse.json();
-        return response.response;
+        return response;
     }
 }
