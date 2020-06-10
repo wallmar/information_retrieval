@@ -3,28 +3,31 @@
     <section class="max-width-container section">
         <h2 class="mb-5 mt-2">Suche nach deinen ?</h2>
         <form class="mb-5 form">
-
             <div class="input-group input-group-lg">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-lg">Suche ...</span>
+                    <span class="input-group-text" id="inputGroup-sizing-lg">Search ...</span>
                 </div>
-                <input type="text" class="form-control input" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="z.B. Deine Mudda">
+                <input required type="text" class="form-control input" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="z.B. Teletubbies">
             </div>
             <div class="d-flex justify-content-around mt-4 mb-4">
                 <div class="input-group input-group-sm mr-4">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-lg2">Von</span>
+                        <span class="input-group-text" id="inputGroup-sizing-lg2">From</span>
                     </div>
                     <input type="number" class="form-control from" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="z.B. 2003">
                 </div>
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-lg3">Bis</span>
+                        <span class="input-group-text" id="inputGroup-sizing-lg3">To</span>
                     </div>
                     <input type="number" class="form-control to" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="z.B. 2007">
                 </div>
             </div>
-            <button type="submit" class="btn btn-warning submit btn-lg">Submit</button>
+            <div class="genres mb-4"></div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-warning submit btn-lg">Submit</button>
+                <button type="reset" class="btn btn-dark reset btn-lg">Reset</button>
+            </div>
         </form>
     </section>
 <%= require('html-loader!./partials/_footer.html') %>

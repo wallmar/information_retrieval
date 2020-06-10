@@ -3,15 +3,16 @@ export default class Solr {
         this.solrUrl = solrUrl;
     }
     
-    async search(query, from, to, start = 0, rows = 10) {
+    async search(query, from, to, checkedGenres, start = 0, rows = 10) {
         if (from === "") from = 0;
         if (to === "") to = 3000;
+        const genres = checkedGenres.map(genre => `genres:${genre}`);
         return await this.postSolrRequest("select", {
             params: {
                 fl: "*,score",
                 start,
                 rows,
-                fq: `year_i:[${from} TO ${to}]`,
+                fq: [`year_i:[${from} TO ${to}]`, ...genres],
                 hl: "on",
                 "hl.simple.pre": "<span class='hl'>",
                 "hl.simple.post": "</span>",
@@ -23,6 +24,17 @@ export default class Solr {
                     qf: "title_txt_en^10 plot_txt_en^5",
                     mm: "100%",
                 },
+            },
+        });
+    }
+
+    async getGenres() {
+        return await this.postSolrRequest("select", {
+            params: {
+                q: "*",
+                "facet.field":"genres",
+                rows: "0",
+                facet: "on"
             },
         });
     }

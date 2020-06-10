@@ -13,3 +13,24 @@
   border-radius: 5px;
   color: white;
 }
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.genre-label {
+  user-select: none;
+  font-size: $littleSize;
+  &:hover {
+    color: $primaryColor;
+  }
+}
+
+.genre-item {
+  padding-right: 30px;
+}
+
+.genre-input:checked + .genre-label {
+  color: $primaryColor;
+}
