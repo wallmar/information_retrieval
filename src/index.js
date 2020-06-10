@@ -86,7 +86,7 @@ function getCountHTML(count) {
 function getGenreHTML(genre, count) {
     return `
         <input type="checkbox" class="form-check-input genre-input" value="${genre}" id="${genre}">
-        <label class="form-check-label genre-label" for="${genre}">${genre.toUpperCase()} (${count})</label>   
+        <label class="form-check-label genre-label" for="${genre}">${genre.toUpperCase()}</label>   
     `
 }
 

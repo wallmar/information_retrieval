@@ -1,6 +1,14 @@
 @import 'utilities';
 
+@keyframes expand {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
 .result {
+  animation: expand .5s ease-in-out;
   &__title {
     color: $primaryColor;
     font-size: $largeSize;
@@ -21,6 +29,7 @@
 
 .genre-label {
   user-select: none;
+  cursor: pointer;
   font-size: $littleSize;
   &:hover {
     color: $primaryColor;
@@ -33,4 +42,10 @@
 
 .genre-input:checked + .genre-label {
   color: $primaryColor;
+}
+
+
+main {
+  margin-top: 40vh;
+  background-color: $backgroundColor;
 }

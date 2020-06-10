@@ -1,11 +1,22 @@
 @import 'utilities';
 
 .header{
+    &__bar {
+        background-color: #000000;
+        position: fixed;
+        width: 100vw;
+        top: 0;
+        z-index: -1;
+    }
     &__logo {
         color: $primaryColor;
         font-size: $largeSize;
     }
     &__hero{
+        top: 0;
+        position: fixed;
+        width: 100vw;
+        z-index: -2;
         background-repeat: no-repeat;
         background-size: cover;
         display: flex;
@@ -15,7 +26,7 @@
 
         &__container{
             margin: 2.5em 0;
-            min-height: 30vh;
+            min-height: 40vh;
             &__p{
                 font-size: 2.5em;
                 color: $primaryColor;
