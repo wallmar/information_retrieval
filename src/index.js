@@ -32,11 +32,11 @@ document.addEventListener("DOMContentLoaded",async () => {
                 continue;
             genres_obj[fields[i]] = fields[i + 1];
         }
-        for (const [genre, count] of Object.entries(genres_obj)) {
+        for (const [genre] of Object.entries(genres_obj)) {
             const node = document.createElement("div");
             node.classList.add("form-check");
             node.classList.add("genre-item");
-            node.innerHTML = getGenreHTML(genre, count);
+            node.innerHTML = getGenreHTML(genre);
             genres.appendChild(node);
         }
     }
@@ -50,6 +50,65 @@ document.addEventListener("DOMContentLoaded",async () => {
         });
     });
 });
+
+function resetResults() {
+    const articles = document.querySelectorAll(".result");
+    const count = document.querySelector(".count");
+    if (count)
+        count.remove();
+    articles.forEach(article => article.remove());
+    if(document.querySelector(".suggestions"))
+        document.querySelector(".suggestions").remove();
+}
+
+function getCheckedGenres() {
+    const children = genres.childNodes;
+    const checked = [];
+    children.forEach(genre => {
+        if(genre.firstElementChild.checked)
+          checked.push(genre.firstElementChild.value)
+    });
+    return checked;
+}
+
+async function displayResults() {
+    resetResults();
+    try {
+        const checkedGenres = getCheckedGenres();
+        const response = await solr.search(input.value, from.value, to.value, checkedGenres);
+        HandleSuggestions(await solr.getSuggestions(input.value));
+        const count = document.createElement('p');
+        count.classList.add('count');
+        count.innerHTML = getCountHTML(response.response.numFound);
+        section.appendChild(count);
+        for (const [i, doc] of response.response["docs"].entries()) {
+            const result = document.createElement("div");
+            result.innerHTML = getResultHTML(doc, response.highlighting[doc.id]);
+            section.appendChild(result);
+        }
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+function HandleSuggestions(suggestions_response) {
+    if(suggestions_response.spellcheck.suggestions[1]) {
+        const suggestions = suggestions_response.spellcheck.suggestions[1].suggestion;
+        const suggestionsNode = document.createElement("div");
+        suggestionsNode.classList.add("suggestions");
+        suggestionsNode.classList.add("card");
+        suggestionsNode.classList.add("mb-5");
+        suggestionsNode.classList.add("mt-5");
+        suggestionsNode.innerHTML = getSuggestionHTML(suggestions);
+        section.appendChild(suggestionsNode);
+        document.querySelectorAll(".suggestion").forEach(suggestion => {
+            suggestion.addEventListener('click', (ev) => {
+                input.value = ev.target.value;
+                displayResults();
+            })
+        });
+    }
+}
 
 function getResultHTML(doc, highlighting) {
     return `
@@ -83,48 +142,27 @@ function getCountHTML(count) {
     `
 }
 
-function getGenreHTML(genre, count) {
+function getGenreHTML(genre) {
     return `
         <input type="checkbox" class="form-check-input genre-input" value="${genre}" id="${genre}">
         <label class="form-check-label genre-label" for="${genre}">${genre.toUpperCase()}</label>   
     `
 }
 
-function resetResults() {
-    const articles = document.querySelectorAll(".result");
-    const count = document.querySelector(".count");
-    if (count)
-        count.remove();
-    articles.forEach(article => article.remove())
-}
-
-function getCheckedGenres() {
-    const children = genres.childNodes;
-    const checked = [];
-    children.forEach(genre => {
-        if(genre.firstElementChild.checked)
-          checked.push(genre.firstElementChild.value)
+function getSuggestionHTML(suggestions) {
+    let html = `
+            <div class="card-header d-flex">
+                <p class="mr-2">Meinten Sie</p>
+    `;
+    suggestions.forEach(suggestion => {
+        html += `
+                <p class="mr-2"><button class="btn btn-primary btn-sm suggestion" value="${suggestion.word}">${suggestion.word}</button></p>
+        `
     });
-    return checked;
-}
-
-async function displayResults() {
-    resetResults();
-    try {
-        const checkedGenres = getCheckedGenres();
-        const response = await solr.search(input.value, from.value, to.value, checkedGenres);
-        const count = document.createElement('p');
-        count.classList.add('count');
-        count.innerHTML = getCountHTML(response.response.numFound);
-        section.appendChild(count);
-        for (const [i, doc] of response.response["docs"].entries()) {
-            const result = document.createElement("div");
-            result.innerHTML = getResultHTML(doc, response.highlighting[doc.id]);
-            section.appendChild(result);
-        }
-    } catch (e) {
-        console.error(e);
-    }
+    html += `
+            </div>
+    `;
+    return html;
 }
 
 

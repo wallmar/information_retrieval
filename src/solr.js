@@ -39,6 +39,17 @@ export default class Solr {
         });
     }
 
+    async getSuggestions(query) {
+        return await this.postSolrRequest("spell", {
+            params: {
+                q: query,
+                rows: "0",
+                "spellcheck.count": 3,
+                spellcheck: "on"
+            },
+        });
+    }
+
     async postSolrRequest(url, body) {
         const jsonResponse = await fetch(`${this.solrUrl}/${url}`, {
             method: "POST",
