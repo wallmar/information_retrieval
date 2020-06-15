@@ -1,5 +1,5 @@
 {
-  "name": "cms",
+  "name": "movie-club",
   "version": "1.0.0",
   "description": "* [W3C Validator](https://validator.w3.org/#validate_by_upload)",
   "main": "index.js",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/wallmar/cms-2019.git"
   },
-  "author": "Lena Heiglaur, Markus Wallner",
+  "author": "Lena Heiglaur, Simon Seebacher, Markus Wallner",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/wallmar/cms-2019/issues"
