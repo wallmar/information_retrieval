@@ -30,6 +30,10 @@ document.addEventListener("DOMContentLoaded",async () => {
                 fields[i] = "sci-fi";
             if(fields[i] === "fi")
                 continue;
+            if(fields[i] === "film")
+                fields[i] = "film-noir";
+            if(fields[i] === "noir")
+                continue;
             genres_obj[fields[i]] = fields[i + 1];
         }
         for (const [genre] of Object.entries(genres_obj)) {
